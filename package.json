@@ -10,12 +10,19 @@
     "dev": "nodemon --exec ts-node src/app.ts",
     "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
     "lint:fix": "eslint --fix 'src/**/*.{ts,tsx,js,jsx}'",
-    "lint:format": "prettier --write ."
+    "lint:format": "prettier --write .",
+    "prisma:migrate": "npx prisma migrate dev --name init",
+    "prisma:generate": "npx prisma generate",
+    "prisma:seed": "prisma db seed",
+    "prisma:pull": "npx prisma db pull",
+    "prisma:push": "npx prisma db push",
+    "prisma:studio": "npx prisma studio"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.0.0",
     "express": "^4.18.2"
   },
   "devDependencies": {
@@ -27,6 +34,7 @@
     "eslint-config-prettier": "^8.8.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.0",
+    "prisma": "^5.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   }

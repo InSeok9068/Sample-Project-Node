@@ -131,3 +131,7 @@ dist
 
 # IntelliJ
 .idea/
+
+# Prisma
+db/
+prisma/migrations/**/*
