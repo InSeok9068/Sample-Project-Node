@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx tsc",
     "start": "tsc && node dist/app.js",
-    "dev": "nodemon - exec 'ts-node' src/app.ts"
+    "dev": "nodemon - exec 'ts-node' src/app.ts",
+    "lint": "eslint 'src/**/*.{ts,tsx,js,jsx}'",
+    "lint:fix": "eslint --fix 'src/**/*.{ts,tsx,js,jsx}'",
+    "lint:format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -18,7 +21,12 @@
   "devDependencies": {
     "@types/express": "^4.17.17",
     "@types/node": "^20.4.2",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
     "nodemon": "^3.0.1",
+    "prettier": "^3.0.0",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
   }
