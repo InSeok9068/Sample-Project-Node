@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
-import { AccountSeed } from './seed.data/account.seed';
-import { AdminUserSeed, TestUserSeed } from './seed.data/admin.user.seed';
+import { PrismaClient } from "@prisma/client";
+import { AccountSeed } from "./seed.data/account.seed";
+import { AdminUserSeed, TestUserSeed } from "./seed.data/admin.user.seed";
 
 const prisma = new PrismaClient();
 
@@ -12,14 +12,14 @@ async function main() {
     where: { id: 1 },
     update: {},
     create: {
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: 'LAYOUT',
-      redirect: '/dashboard/analysis',
+      path: "/dashboard",
+      name: "Dashboard",
+      component: "LAYOUT",
+      redirect: "/dashboard/analysis",
       meta: {
         create: {
-          title: 'routes.dashboard.dashboard',
-          icon: 'bx:bx-home',
+          title: "routes.dashboard.dashboard",
+          icon: "bx:bx-home",
         },
       },
     },
@@ -29,16 +29,16 @@ async function main() {
     where: { id: 2 },
     update: {},
     create: {
-      path: 'analysis',
-      name: 'Analysis',
-      component: '/dashboard/analysis/index',
+      path: "analysis",
+      name: "Analysis",
+      component: "/dashboard/analysis/index",
       meta: {
         create: {
           hideMenu: true,
           hideBreadcrumb: true,
-          title: 'routes.dashboard.analysis',
-          currentActiveMenu: '/dashboard',
-          icon: 'bx:bx-home',
+          title: "routes.dashboard.analysis",
+          currentActiveMenu: "/dashboard",
+          icon: "bx:bx-home",
         },
       },
       parentId: dashboardSeed.id,
@@ -49,14 +49,14 @@ async function main() {
     where: { id: 3 },
     update: {},
     create: {
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: 'LAYOUT',
-      redirect: '/dashboard/analysis',
+      path: "/dashboard",
+      name: "Dashboard",
+      component: "LAYOUT",
+      redirect: "/dashboard/analysis",
       meta: {
         create: {
-          title: 'routes.dashboard.dashboard',
-          icon: 'bx:bx-home',
+          title: "routes.dashboard.dashboard",
+          icon: "bx:bx-home",
         },
       },
       parentId: dashboardSeed.id,
@@ -67,14 +67,14 @@ async function main() {
     where: { id: 4 },
     update: {},
     create: {
-      path: '/permission',
-      name: 'Permission',
-      component: 'LAYOUT',
-      redirect: '/permission/front/page',
+      path: "/permission",
+      name: "Permission",
+      component: "LAYOUT",
+      redirect: "/permission/front/page",
       meta: {
         create: {
-          icon: 'carbon:user-role',
-          title: 'routes.demo.permission.permission',
+          icon: "carbon:user-role",
+          title: "routes.demo.permission.permission",
         },
       },
     },
@@ -84,11 +84,11 @@ async function main() {
     where: { id: 5 },
     update: {},
     create: {
-      path: 'back',
-      name: 'PermissionBackDemo',
+      path: "back",
+      name: "PermissionBackDemo",
       meta: {
         create: {
-          title: 'routes.demo.permission.back',
+          title: "routes.demo.permission.back",
         },
       },
       parentId: authRouteSeed.id,
@@ -99,12 +99,12 @@ async function main() {
     where: { id: 6 },
     update: {},
     create: {
-      path: 'page',
-      name: 'BackAuthPage',
-      component: '/demo/permission/back/index',
+      path: "page",
+      name: "BackAuthPage",
+      component: "/demo/permission/back/index",
       meta: {
         create: {
-          title: 'routes.demo.permission.backPage',
+          title: "routes.demo.permission.backPage",
         },
       },
       parentId: backSeed.id,
@@ -115,12 +115,12 @@ async function main() {
     where: { id: 7 },
     update: {},
     create: {
-      path: 'btn',
-      name: 'BackAuthBtn',
-      component: '/demo/permission/back/Btn',
+      path: "btn",
+      name: "BackAuthBtn",
+      component: "/demo/permission/back/Btn",
       meta: {
         create: {
-          title: 'routes.demo.permission.backBtn',
+          title: "routes.demo.permission.backBtn",
         },
       },
       parentId: backSeed.id,
@@ -131,14 +131,14 @@ async function main() {
     where: { id: 8 },
     update: {},
     create: {
-      path: '/level',
-      name: 'Level',
-      component: 'LAYOUT',
-      redirect: '/level/menu1/menu1-1/menu1-1-1',
+      path: "/level",
+      name: "Level",
+      component: "LAYOUT",
+      redirect: "/level/menu1/menu1-1/menu1-1-1",
       meta: {
         create: {
-          icon: 'carbon:user-role',
-          title: 'routes.demo.level.level',
+          icon: "carbon:user-role",
+          title: "routes.demo.level.level",
         },
       },
     },
@@ -148,11 +148,11 @@ async function main() {
     where: { id: 9 },
     update: {},
     create: {
-      path: 'menu1',
-      name: 'Menu1',
+      path: "menu1",
+      name: "Menu1",
       meta: {
         create: {
-          title: 'Menu1',
+          title: "Menu1",
         },
       },
       parentId: levelSeed.id,
@@ -163,11 +163,11 @@ async function main() {
     where: { id: 10 },
     update: {},
     create: {
-      path: 'menu1-1',
-      name: 'Menu1-1',
+      path: "menu1-1",
+      name: "Menu1-1",
       meta: {
         create: {
-          title: 'Menu1-1',
+          title: "Menu1-1",
         },
       },
       parentId: menu1Seed.id,
@@ -178,12 +178,12 @@ async function main() {
     where: { id: 11 },
     update: {},
     create: {
-      path: 'menu1-1-1',
-      name: 'Menu1-1-1',
-      component: '/demo/level/Menu111',
+      path: "menu1-1-1",
+      name: "Menu1-1-1",
+      component: "/demo/level/Menu111",
       meta: {
         create: {
-          title: 'Menu111',
+          title: "Menu111",
         },
       },
       parentId: menu11Seed.id,
@@ -194,12 +194,12 @@ async function main() {
     where: { id: 12 },
     update: {},
     create: {
-      path: 'menu1-2',
-      name: 'Menu1-2',
-      component: '/demo/level/Menu12',
+      path: "menu1-2",
+      name: "Menu1-2",
+      component: "/demo/level/Menu12",
       meta: {
         create: {
-          title: 'Menu1-2',
+          title: "Menu1-2",
         },
       },
       parentId: menu1Seed.id,
@@ -210,12 +210,12 @@ async function main() {
     where: { id: 13 },
     update: {},
     create: {
-      path: 'menu2',
-      name: 'Menu2',
-      component: '/demo/level/Menu2',
+      path: "menu2",
+      name: "Menu2",
+      component: "/demo/level/Menu2",
       meta: {
         create: {
-          title: 'Menu2',
+          title: "Menu2",
         },
       },
       parentId: levelSeed.id,
@@ -226,14 +226,14 @@ async function main() {
     where: { id: 14 },
     update: {},
     create: {
-      path: '/system',
-      name: 'System',
-      component: 'LAYOUT',
-      redirect: '/system/account',
+      path: "/system",
+      name: "System",
+      component: "LAYOUT",
+      redirect: "/system/account",
       meta: {
         create: {
-          title: 'routes.demo.system.moduleName',
-          icon: 'ion:settings-outline',
+          title: "routes.demo.system.moduleName",
+          icon: "ion:settings-outline",
         },
       },
     },
@@ -243,12 +243,12 @@ async function main() {
     where: { id: 15 },
     update: {},
     create: {
-      path: 'account',
-      name: 'AccountManagement',
-      component: '/demo/system/account/index',
+      path: "account",
+      name: "AccountManagement",
+      component: "/demo/system/account/index",
       meta: {
         create: {
-          title: 'routes.demo.system.account',
+          title: "routes.demo.system.account",
           ignoreKeepAlive: true,
         },
       },
@@ -260,16 +260,16 @@ async function main() {
     where: { id: 16 },
     update: {},
     create: {
-      path: 'account_detail/:id',
-      name: 'AccountDetail',
-      component: '/demo/system/account/AccountDetail',
+      path: "account_detail/:id",
+      name: "AccountDetail",
+      component: "/demo/system/account/AccountDetail",
       meta: {
         create: {
-          title: 'routes.demo.system.account_detail',
+          title: "routes.demo.system.account_detail",
           ignoreKeepAlive: true,
           hideMenu: true,
           showMenu: false,
-          currentActiveMenu: '/system/account',
+          currentActiveMenu: "/system/account",
         },
       },
       parentId: systemSeed.id,
@@ -280,12 +280,12 @@ async function main() {
     where: { id: 17 },
     update: {},
     create: {
-      path: 'role',
-      name: 'RoleManagement',
-      component: '/demo/system/role/index',
+      path: "role",
+      name: "RoleManagement",
+      component: "/demo/system/role/index",
       meta: {
         create: {
-          title: 'routes.demo.system.role',
+          title: "routes.demo.system.role",
           ignoreKeepAlive: true,
         },
       },
@@ -297,12 +297,12 @@ async function main() {
     where: { id: 18 },
     update: {},
     create: {
-      path: 'menu',
-      name: 'MenuManagement',
-      component: '/demo/system/menu/index',
+      path: "menu",
+      name: "MenuManagement",
+      component: "/demo/system/menu/index",
       meta: {
         create: {
-          title: 'routes.demo.system.menu',
+          title: "routes.demo.system.menu",
           ignoreKeepAlive: true,
         },
       },
@@ -314,12 +314,12 @@ async function main() {
     where: { id: 19 },
     update: {},
     create: {
-      path: 'dept',
-      name: 'DeptManagement',
-      component: '/demo/system/dept/index',
+      path: "dept",
+      name: "DeptManagement",
+      component: "/demo/system/dept/index",
       meta: {
         create: {
-          title: 'routes.demo.system.dept',
+          title: "routes.demo.system.dept",
           ignoreKeepAlive: true,
         },
       },
@@ -331,12 +331,12 @@ async function main() {
     where: { id: 20 },
     update: {},
     create: {
-      path: 'changePassword',
-      name: 'ChangePassword',
-      component: '/demo/system/password/index',
+      path: "changePassword",
+      name: "ChangePassword",
+      component: "/demo/system/password/index",
       meta: {
         create: {
-          title: 'routes.demo.system.password',
+          title: "routes.demo.system.password",
           ignoreKeepAlive: true,
         },
       },
@@ -348,13 +348,13 @@ async function main() {
     where: { id: 21 },
     update: {},
     create: {
-      path: '/link',
-      name: 'Link',
-      component: 'LAYOUT',
+      path: "/link",
+      name: "Link",
+      component: "LAYOUT",
       meta: {
         create: {
-          icon: 'ion:tv-outline',
-          title: 'routes.demo.iframe.frame',
+          icon: "ion:tv-outline",
+          title: "routes.demo.iframe.frame",
         },
       },
     },
@@ -364,13 +364,13 @@ async function main() {
     where: { id: 22 },
     update: {},
     create: {
-      path: 'doc',
-      name: 'Doc',
-      component: '/demo/iframe/index',
+      path: "doc",
+      name: "Doc",
+      component: "/demo/iframe/index",
       meta: {
         create: {
-          title: 'routes.demo.iframe.doc',
-          frameSrc: 'https://doc.vvbin.cn/',
+          title: "routes.demo.iframe.doc",
+          frameSrc: "https://doc.vvbin.cn/",
         },
       },
       parentId: linkSeed.id,
@@ -381,12 +381,12 @@ async function main() {
     where: { id: 23 },
     update: {},
     create: {
-      path: 'https://doc.vvbin.cn/',
-      name: 'DocExternal',
-      component: 'LAYOUT',
+      path: "https://doc.vvbin.cn/",
+      name: "DocExternal",
+      component: "LAYOUT",
       meta: {
         create: {
-          title: 'routes.demo.iframe.docExternal',
+          title: "routes.demo.iframe.docExternal",
         },
       },
       parentId: linkSeed.id,
