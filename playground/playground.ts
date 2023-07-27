@@ -29,3 +29,25 @@ type AFunction = (fun: BFunction) => void;
 const afunction: AFunction = (fun: BFunction) => fun();
 
 afunction(bfunction);
+
+import { Magma } from "fp-ts/Magma";
+
+const MagmaSub: Magma<number> = {
+  concat: (first, second) => first - second,
+};
+
+// helper
+const getPipeableConcat =
+  <A>(M: Magma<A>) =>
+  (second: A) =>
+  (first: A): A =>
+    M.concat(first, second);
+
+const concat = getPipeableConcat(MagmaSub);
+
+// 사용 예시
+
+import { pipe } from "fp-ts/function";
+
+pipe(10, concat(2), concat(3), concat(1), concat(2), console.log);
+// => 2
