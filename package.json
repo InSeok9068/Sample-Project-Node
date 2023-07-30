@@ -13,7 +13,7 @@
     "lint:format": "prettier --write .",
     "prisma:migrate": "npx prisma migrate dev --name init",
     "prisma:generate": "npx prisma generate",
-    "prisma:seed": "prisma db seed",
+    "prisma:seed": "ts-node prisma/seed.ts",
     "prisma:pull": "npx prisma db pull",
     "prisma:push": "npx prisma db push",
     "prisma:studio": "npx prisma studio"
