@@ -1,4 +1,4 @@
-import { Router, Request, Response } from "express";
+import { Request, Response, Router } from "express";
 import { pipe } from "fp-ts/function";
 import * as TE from "fp-ts/TaskEither";
 import { getEmployess } from "../services";
