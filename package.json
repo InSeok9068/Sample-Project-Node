@@ -27,8 +27,9 @@
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "fp-ts": "^2.16.0",
-    "winston": "^3.10.0",
-    "morgan": "^1.10.0"
+    "helmet": "^7.0.0",
+    "morgan": "^1.10.0",
+    "winston": "^3.10.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
