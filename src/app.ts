@@ -1,7 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import helmet from "helmet";
-import { employeeRoute } from "./routes";
+import { userRoute } from "./routes";
 import { logger, morganMiddleware } from "./configs";
 
 const app: Express = express();
@@ -19,7 +19,7 @@ app.set("view engine", "ejs");
 app.set("views", "./views");
 
 // Route
-app.use(employeeRoute);
+app.use(userRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Typescript + Node.js + Functional Programing + Express Server");
