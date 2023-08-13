@@ -3,38 +3,38 @@
   Rifattorizzare il seguente codice in modo da eliminare l'errore di compilazione.
 
 */
-import { flow } from 'fp-ts/function'
-import { match, Option } from 'fp-ts/Option'
+import { flow } from "fp-ts/function";
+import { match, Option } from "fp-ts/Option";
 
 interface User {
-  readonly username: string
+  readonly username: string;
 }
 
-declare const queryByUsername: (username: string) => Option<User>
+declare const queryByUsername: (username: string) => Option<User>;
 
 // -------------------------------------
 // model
 // -------------------------------------
 
 interface Ok<A> {
-  readonly code: 200
-  readonly body: A
+  readonly code: 200;
+  readonly body: A;
 }
 interface NotFound {
-  readonly code: 404
-  readonly message: string
+  readonly code: 404;
+  readonly message: string;
 }
-type HttpResponse<A> = Ok<A> | NotFound
+type HttpResponse<A> = Ok<A> | NotFound;
 
 // -------------------------------------
 // constructors
 // -------------------------------------
 
-const ok = <A>(body: A): HttpResponse<A> => ({ code: 200, body })
+const ok = <A>(body: A): HttpResponse<A> => ({ code: 200, body });
 const notFound = (message: string): HttpResponse<never> => ({
   code: 404,
-  message
-})
+  message,
+});
 
 // -------------------------------------
 // API
@@ -42,5 +42,5 @@ const notFound = (message: string): HttpResponse<never> => ({
 
 export const getByUsername: (username: string) => HttpResponse<User> = flow(
   queryByUsername,
-  match(() => notFound('User not found.'), ok)
-)
+  match(() => notFound("User not found."), ok),
+);

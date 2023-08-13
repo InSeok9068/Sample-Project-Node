@@ -9,12 +9,12 @@
 - 요소 배열
 
 ```ts
-import * as S from 'fp-ts/Semigroup'
-import * as N from 'fp-ts/number'
+import * as S from "fp-ts/Semigroup";
+import * as N from "fp-ts/number";
 
-const sum = S.concatAll(N.SemigroupSum)(2)
+const sum = S.concatAll(N.SemigroupSum)(2);
 
-console.log(sum([1, 2, 3, 4])) // => 12
+console.log(sum([1, 2, 3, 4])); // => 12
 ```
 
 초기 값을 제공해야 하는 이유는 무엇인가요?
@@ -27,9 +27,11 @@ console.log(sum([1, 2, 3, 4])) // => 12
 또한 `NonEmptyArray<A>`를 사용하고 초기 값을 사용하지 않는 `concatAll` 메서드를 정의할 수도 있습니다. 실제로 구현하기가 매우 쉽습니다.
 
 ```ts
-import * as Semigroup from 'fp-ts/Semigroup'
-import * as NEA from 'fp-ts/NonEmptyArray'
+import * as Semigroup from "fp-ts/Semigroup";
+import * as NEA from "fp-ts/NonEmptyArray";
 
-const concatAll = <A>(S: Semigroup<A>) => (as: NEA<A>) =>
-  Semigroup.concatAll(S)(NEA.tail(as))(NEA.head(as))
+const concatAll =
+  <A,>(S: Semigroup<A>) =>
+  (as: NEA<A>) =>
+    Semigroup.concatAll(S)(NEA.tail(as))(NEA.head(as));
 ```

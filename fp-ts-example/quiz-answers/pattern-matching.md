@@ -2,33 +2,32 @@
 
 ```ts
 interface Nil {
-  readonly _tag: 'Nil'
+  readonly _tag: "Nil";
 }
 
 interface Cons<A> {
-  readonly _tag: 'Cons'
-  readonly head: A
-  readonly tail: List<A>
+  readonly _tag: "Cons";
+  readonly head: A;
+  readonly tail: List<A>;
 }
 
-export type List<A> = Nil | Cons<A>
+export type List<A> = Nil | Cons<A>;
 
-export const match = <R, A>(
-  onNil: () => R,
-  onCons: (head: A, tail: List<A>) => R
-) => (fa: List<A>): R => {
-  switch (fa._tag) {
-    case 'Nil':
-      return onNil()
-    case 'Cons':
-      return onCons(fa.head, fa.tail)
-  }
-}
+export const match =
+  <R, A>(onNil: () => R, onCons: (head: A, tail: List<A>) => R) =>
+  (fa: List<A>): R => {
+    switch (fa._tag) {
+      case "Nil":
+        return onNil();
+      case "Cons":
+        return onCons(fa.head, fa.tail);
+    }
+  };
 
 export const head = match(
   () => undefined,
-  (head, _tail) => head
-)
+  (head, _tail) => head,
+);
 ```
 
 `head` API가 완벽하지 않은 이유는 무엇일까요?

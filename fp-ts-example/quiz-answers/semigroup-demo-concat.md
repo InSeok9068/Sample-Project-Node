@@ -7,11 +7,11 @@
 네, 가능합니다. 세미그룹을 다음과 같이 정의해 보겠습니다.
 
 ```ts
-import { Semigroup } from 'fp-ts/Semigroup'
+import { Semigroup } from "fp-ts/Semigroup";
 
 const SemigroupRetryPolicy: Semigroup<RetryPolicy> = {
-  concat: (first, second) => concat(first)(second)
-}
+  concat: (first, second) => concat(first)(second),
+};
 ```
 
 모든 Semigroup 규칙을 준수합니다.

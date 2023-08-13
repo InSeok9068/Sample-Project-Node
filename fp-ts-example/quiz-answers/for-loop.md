@@ -2,15 +2,15 @@
 
 ```ts
 // 입력
-const xs: Array<number> = [1, 2, 3]
+const xs: Array<number> = [1, 2, 3];
 
 // 변환
-const double = (n: number): number => n * 2
+const double = (n: number): number => n * 2;
 
 // 결과: `xs`의 각 요소가 2배가 되는 배열을 원합니다.
-const ys: Array<number> = []
+const ys: Array<number> = [];
 for (let i = 0; i <= xs.length; i++) {
-  ys.push(double(xs[i]))
+  ys.push(double(xs[i]));
 }
 ```
 

@@ -1,136 +1,119 @@
-import {
-  constFalse,
-  constTrue,
-  constUndefined,
-  flow,
-  pipe
-} from 'fp-ts/function'
-import * as IO from 'fp-ts/IO'
-import * as S from 'fp-ts/string'
-import * as O from 'fp-ts/Option'
-import { randomInt } from 'fp-ts/Random'
-import * as RA from 'fp-ts/ReadonlyArray'
-import * as T from 'fp-ts/Task'
-import { getLine, putStrLn } from './Console'
+import { constFalse, constTrue, constUndefined, flow, pipe } from "fp-ts/function";
+import * as IO from "fp-ts/IO";
+import * as S from "fp-ts/string";
+import * as O from "fp-ts/Option";
+import { randomInt } from "fp-ts/Random";
+import * as RA from "fp-ts/ReadonlyArray";
+import * as T from "fp-ts/Task";
+import { getLine, putStrLn } from "./Console";
 
 interface State {
-  readonly name: string
-  readonly guesses: ReadonlyArray<string>
-  readonly word: ReadonlyArray<string>
+  readonly name: string;
+  readonly guesses: ReadonlyArray<string>;
+  readonly word: ReadonlyArray<string>;
 }
 
 const newState = (name: string, word: string): State => ({
   name,
-  word: word.split(''),
-  guesses: []
-})
+  word: word.split(""),
+  guesses: [],
+});
 
 const addGuess = (state: State, guess: string): State => ({
   ...state,
-  guesses: pipe(state.guesses, RA.append(guess))
-})
+  guesses: pipe(state.guesses, RA.append(guess)),
+});
 
-const difference = RA.difference(S.Eq)
+const difference = RA.difference(S.Eq);
 
-const failures = (state: State): number =>
-  pipe(state.guesses, difference(state.word)).length
+const failures = (state: State): number => pipe(state.guesses, difference(state.word)).length;
 
-const playerLost = (state: State): boolean => failures(state) > 10
+const playerLost = (state: State): boolean => failures(state) > 10;
 
-const playerWon = (state: State): boolean =>
-  pipe(state.word, difference(state.guesses)).length === 0
+const playerWon = (state: State): boolean => pipe(state.word, difference(state.guesses)).length === 0;
 
 const question = (question: string): T.Task<string> =>
   pipe(
     putStrLn(question),
-    T.chain(() => getLine)
-  )
+    T.chain(() => getLine),
+  );
 
-const getName: T.Task<string> = question('What is your name:')
+const getName: T.Task<string> = question("What is your name:");
 
 const parseGuess = (s: string): O.Option<string> => {
-  const out = s.toLowerCase().trim()
-  return out.length === 1 ? O.some(out) : O.none
-}
+  const out = s.toLowerCase().trim();
+  return out.length === 1 ? O.some(out) : O.none;
+};
 
 const getGuess: T.Task<string> = pipe(
-  question('Please enter a letter:'),
+  question("Please enter a letter:"),
   T.chain(
     flow(
       parseGuess,
-      O.match(() => getGuess, T.of)
-    )
-  )
-)
+      O.match(() => getGuess, T.of),
+    ),
+  ),
+);
 
-const dictionary: ReadonlyArray<string> = getDictionary()
+const dictionary: ReadonlyArray<string> = getDictionary();
 
 const randomElem = <A>(as: ReadonlyArray<A>): IO.IO<A> =>
   pipe(
     randomInt(0, as.length - 1),
-    IO.map((i) => as[i])
-  )
+    IO.map((i) => as[i]),
+  );
 
-const chooseWord: T.Task<string> = pipe(dictionary, randomElem, T.fromIO)
+const chooseWord: T.Task<string> = pipe(dictionary, randomElem, T.fromIO);
 
 const render = (state: State) => {
-  const word = state.word
-    .map((c) => (state.guesses.includes(c) ? ` ${c} ` : '   '))
-    .join('')
-  const line = state.word.map(() => ' - ').join('')
-  const guesses = ` Guesses: ${state.guesses.join(', ')}`
-  return putStrLn(word + '\n' + line + '\n\n' + guesses + '\n')
-}
+  const word = state.word.map((c) => (state.guesses.includes(c) ? ` ${c} ` : "   ")).join("");
+  const line = state.word.map(() => " - ").join("");
+  const guesses = ` Guesses: ${state.guesses.join(", ")}`;
+  return putStrLn(word + "\n" + line + "\n\n" + guesses + "\n");
+};
 
 const doLoop = (state: State, guess: string): T.Task<boolean> => {
   if (playerWon(state)) {
-    return pipe(
-      putStrLn(`Congratulations ${state.name} you won the game!`),
-      T.map(constFalse)
-    )
+    return pipe(putStrLn(`Congratulations ${state.name} you won the game!`), T.map(constFalse));
   } else if (playerLost(state)) {
     return pipe(
-      putStrLn(
-        `Sorry ${state.name} you lost the game. The word was ${state.word.join(
-          ''
-        )}`
-      ),
-      T.map(constFalse)
-    )
+      putStrLn(`Sorry ${state.name} you lost the game. The word was ${state.word.join("")}`),
+      T.map(constFalse),
+    );
   } else if (state.word.includes(guess)) {
-    return pipe(putStrLn('You guessed correctly!'), T.map(constTrue))
+    return pipe(putStrLn("You guessed correctly!"), T.map(constTrue));
   } else {
     return pipe(
       // tslint:disable-next-line: quotemark
       putStrLn("That's wrong. but keep trying!"),
-      T.map(constTrue)
-    )
+      T.map(constTrue),
+    );
   }
-}
+};
 
 const loop = (oldState: State): T.Task<State> =>
   pipe(
     T.Do,
-    T.bind('guess', () => getGuess),
-    T.bind('state', ({ guess }) => T.of(addGuess(oldState, guess))),
+    T.bind("guess", () => getGuess),
+    T.bind("state", ({ guess }) => T.of(addGuess(oldState, guess))),
     T.chainFirst(({ state }) => render(state)),
-    T.bind('doLoop', ({ state, guess }) => doLoop(state, guess)),
-    T.chain(({ doLoop, state }) => (doLoop ? loop(state) : T.of(state)))
-  )
+    T.bind("doLoop", ({ state, guess }) => doLoop(state, guess)),
+    T.chain(({ doLoop, state }) => (doLoop ? loop(state) : T.of(state))),
+  );
 
 const hangman: T.Task<void> = pipe(
   T.Do,
-  T.chainFirst(() => putStrLn('Welcome to purely functional hangman')),
-  T.bind('name', () => getName),
+  T.chainFirst(() => putStrLn("Welcome to purely functional hangman")),
+  T.bind("name", () => getName),
   T.chainFirst(({ name }) => putStrLn(`Welcome ${name}. Let's begin!`)),
-  T.bind('word', () => chooseWord),
-  T.bind('state', ({ name, word }) => T.of(newState(name, word))),
+  T.bind("word", () => chooseWord),
+  T.bind("state", ({ name, word }) => T.of(newState(name, word))),
   T.chainFirst(({ state }) => render(state)),
   T.chain(({ state }) => loop(state)),
-  T.map(constUndefined)
-)
+  T.map(constUndefined),
+);
 
-hangman()
+hangman();
 
 function getDictionary(): ReadonlyArray<string> {
   return `ability
@@ -1131,5 +1114,5 @@ yet
 you
 young
 your
-yourself`.split('\n')
+yourself`.split("\n");
 }

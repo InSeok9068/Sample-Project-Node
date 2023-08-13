@@ -1,14 +1,14 @@
 ## 문제
 
 ```ts
-import { Magma } from 'fp-ts/Magma'
+import { Magma } from "fp-ts/Magma";
 
 const MagmaSub: Magma<number> = {
-  concat: (first, second) => first - second
-}
+  concat: (first, second) => first - second,
+};
 ```
 
-`concat`이 *닫혀있는* 작업이라는 사실은 사소한 내용이 아닙니다. 만약 `A`가 JavaScript의 숫자 타입(양수 및 음수 부동 집합)이 아닌 자연수 집합(양의 정수)인 우리가 구현한 `MagmaSub`와 같이 `concat`을 사용해 `Magma<Natural>`을 정의할 수 있을까요? `closure` 속성이 유효하지 않은 자연수에 대한 다른 `concat` 작업을 생각할 수 있을까요?
+`concat`이 _닫혀있는_ 작업이라는 사실은 사소한 내용이 아닙니다. 만약 `A`가 JavaScript의 숫자 타입(양수 및 음수 부동 집합)이 아닌 자연수 집합(양의 정수)인 우리가 구현한 `MagmaSub`와 같이 `concat`을 사용해 `Magma<Natural>`을 정의할 수 있을까요? `closure` 속성이 유효하지 않은 자연수에 대한 다른 `concat` 작업을 생각할 수 있을까요?
 
 ## 정답
 

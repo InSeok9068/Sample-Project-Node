@@ -3,12 +3,12 @@
 다음 세미그룹 예시는 법칙을 만족하나요?
 
 ```ts
-import { Semigroup } from 'fp-ts/Semigroup'
+import { Semigroup } from "fp-ts/Semigroup";
 
 /** 항상 첫 번째 인자를 반환 */
-const first = <A>(): Semigroup<A> => ({
-  concat: (first, _second) => first
-})
+const first = <A,>(): Semigroup<A> => ({
+  concat: (first, _second) => first,
+});
 ```
 
 ## 정답
